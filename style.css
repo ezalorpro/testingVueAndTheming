@@ -1,0 +1,148 @@
+:root {
+    --th-base-main-color: 153, 47%;
+    --th-base-main-color-brighness: 46;
+    --th-main-color: hsl(var(--th-base-main-color), calc(var(--th-base-main-color-brighness) * 1%));
+    --th-main-color-light: hsl(var(--th-base-main-color), calc((var(--th-base-main-color-brighness) + 20) * 1%));
+    --th-main-color-dark: hsl(var(--th-base-main-color), calc((var(--th-base-main-color-brighness) - 20) * 1%));
+
+    --th-base-secondary-color: 298, 52%;
+    --th-base-secondary-color-brighness: 56;
+    --th-secondary-color: hsl(var(--th-base-secondary-color), calc(var(--th-base-secondary-color-brighness) * 1%));
+    --th-secondary-color-light: hsl(var(--th-base-secondary-color), calc((var(--th-base-secondary-color-brighness) + 20) * 1%));
+    --th-secondary-color-dark: hsl(var(--th-base-secondary-color), calc((var(--th-base-secondary-color-brighness) - 20) * 1%));
+
+    --th-base-highlight-color: 27, 91%;
+    --th-base-highlight-color-brighness: 56;
+    --th-highlight-color: hsl(var(--th-base-highlight-color), calc(var(--th-base-highlight-color-brighness) * 1%));
+    --th-highlight-color-light: hsl(var(--th-base-highlight-color), calc((var(--th-base-highlight-color-brighness) + 20) * 1%));
+    --th-highlight-color-dark: hsl(var(--th-base-highlight-color), calc((var(--th-base-highlight-color-brighness) - 20) * 1%));
+
+    --th-text-color: hsl(0, 0%, 24%);
+
+    --th-text-on-main: hsl(0, 0%, calc(clamp(24, calc((var(--th-base-main-color-brighness) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-main-light: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-main-color-brighness) + 20) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-main-dark: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-main-color-brighness) - 20) / 100 - 0.6) * -100000), 100) * 1%));
+
+    --th-text-on-secondary: hsl(0, 0%, calc(clamp(24, calc((var(--th-base-secondary-color-brighness) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-secondary-light: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-secondary-color-brighness) + 20) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-secondary-dark: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-secondary-color-brighness) - 20) / 100 - 0.6) * -100000), 100) * 1%));
+
+    --th-text-on-highlight: hsl(0, 0%, calc(clamp(24, calc((var(--th-base-highlight-color-brighness) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-highlight-light: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-highlight-color-brighness) + 20) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-highlight-dark: hsl(0, 0%, calc(clamp(24, calc(((var(--th-base-highlight-color-brighness) - 20) / 100 - 0.6) * -100000), 100) * 1%));
+
+    --th-border-radius: 16px;
+    --th-font-family: Arial, Helvetica, sans-serif;
+    --th-font-size: 16px;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    font-family: var(--th-font-family, "Arial");
+    font-size: var(--th-font-size, 16px);
+    color: var(--th-text-color, #3d3d3d);
+}
+
+/* ----------------- Background colors ----------------- */
+
+/* Main */
+.bg-main {
+    background-color: var(--th-main-color, hsl(153, 47%, 49%));
+}
+
+.bg-main-light {
+    background-color: var(--th-main-color-light, hsl(153, 47%, 69%));
+}
+
+.bg-main-dark {
+    background-color: var(--th-main-color-dark, hsl(153, 47%, 29%));
+}
+
+/* Secondary */
+.bg-secondary {
+    background-color: var(--th-secondary-color, hsl(298, 52%, 56%));
+}
+
+.bg-secondary-light {
+    background-color: var(--th-secondary-color-light, hsl(298, 52%, 76%));
+}
+
+.bg-secondary-dark {
+    background-color: var(--th-secondary-color-dark, hsl(298, 52%, 36%));
+}
+
+/* Highlight */
+.bg-highlight {
+    background-color: var(--th-highlight-color, hsl(27, 91%, 56%));
+}
+
+.bg-highlight-light {
+    background-color: var(--th-highlight-color-light, hsl(27, 91%, 76%));
+}
+
+.bg-highlight-dark {
+    background-color: var(--th-highlight-color-dark, hsl(27, 91%, 36%));
+}
+
+/* ----------------- Text colors ----------------- */
+
+.text-white {
+    color: white;
+}
+
+.text-black {
+    color: #3d3d3d;
+}
+
+/* Main */
+.text-main {
+    color: var(--th-text-main, #3d3d3d);
+}
+
+.text-on-main {
+    color: var(--th-text-on-main, white);
+}
+
+.text-on-main-light {
+    color: var(--th-text-on-main-light, #3d3d3d);
+}
+
+.text-on-main-dark {
+    color: var(--th-text-on-main-dark, white);
+}
+
+/* Secondary */
+.text-on-secondary {
+    color: var(--th-text-on-secondary, white);
+}
+
+.text-on-secondary-light {
+    color: var(--th-text-on-secondary-light, #3d3d3d);
+}
+
+.text-on-secondary-dark {
+    color: var(--th-text-on-secondary-dark, white);
+}
+
+/* Highlight */
+.text-on-highlight {
+    color: var(--th-text-on-highlight, white);
+}
+
+.text-on-highlight-light {
+    color: var(--th-text-on-highlight-light, #3d3d3d);
+}
+
+.text-on-highlight-dark {
+    color: var(--th-text-on-highlight-dark, white);
+}
