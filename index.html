@@ -11,11 +11,8 @@
 <body>
   <!-- my app -->
   <div id="app" v-cloak>
+    <Navbar></Navbar>
     <div class="content-grid">
-      <div>
-        {{ count }}
-        <button @click="increment">+</button>
-      </div>
       <my-test-component class="full-width bg-main-light text-on-main-light"></my-test-component>
       <my-test-component class="bg-main text-on-main"></my-test-component>
       <my-test-component class="bg-main-dark text-on-main-dark"></my-test-component>
@@ -30,7 +27,7 @@
 
   <!-- My test component -->
   <template id="my-test-component">
-    <div style="">
+    <div>
       <div style="padding: 20px;">
         <h1>My test component</h1>
         <p>
@@ -41,6 +38,28 @@
         </p>
       </div>
     </div>
+  </template>
+
+  <!-- Navigation -->
+
+  <template id="navbar-component">
+    <nav class="main-navigation navbar-fixed">
+      <a href="#" class="navbar-logo">
+        <img src="./images/main_logo.png" alt="Logo" />
+      </a>
+      <input type="checkbox" id="menu-toggle" name="menu-toggle" v-model="checked" />
+      <label for="mobile-menu-toggle" class="hamburger" @click="checked = !checked">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Conctact</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </nav>
   </template>
 
   <script>
@@ -61,6 +80,15 @@
 
     app.component("my-test-component", {
       template: "#my-test-component",
+    });
+
+    app.component("Navbar", {
+      template: "#navbar-component",
+      data() {
+        return {
+          checked: false,
+        }
+      },
     });
 
     app.mount("#app");
