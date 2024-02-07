@@ -1,0 +1,97 @@
+:root {
+  $text-hue: hue($text-color);
+  $text-saturation: saturation($text-color);
+  $text-lightness: lightness($text-color);
+
+  --th-base-text-color: #{$text-hue},#{$text-saturation};
+  --th-base-text-color-lightness: #{calc($text-lightness / 1%)};
+  --th-text-color: hsl(var(--th-base-text-color), calc(var(--th-base-text-color-lightness) * 1%));
+
+  @each $colorName, $color in $colors {
+    $hue: hue($color);
+    $saturation: saturation($color);
+    $lightness: lightness($color);
+
+    --th-base-#{$colorName}-color: #{$hue},#{$saturation};
+    --th-base-#{$colorName}-color-lightness: #{calc($lightness / 1%)};
+
+    --th-#{$colorName}-color: hsl(var(--th-base-#{$colorName}-color), calc(var(--th-base-#{$colorName}-color-lightness) * 1%));
+    --th-#{$colorName}-color-light: hsl(var(--th-base-#{$colorName}-color), calc((var(--th-base-#{$colorName}-color-lightness) + 15) * 1%));
+    --th-#{$colorName}-color-dark: hsl(var(--th-base-#{$colorName}-color), calc((var(--th-base-#{$colorName}-color-lightness) - 15) * 1%));
+
+    --th-text-on-#{$colorName}: hsl(var(--th-base-text-color),
+      calc(clamp(var(--th-base-text-color-lightness), calc((var(--th-base-#{$colorName}-color-lightness) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-#{$colorName}-light: hsl(var(--th-base-text-color),
+      calc(clamp(var(--th-base-text-color-lightness), calc(((var(--th-base-#{$colorName}-color-lightness) + 20) / 100 - 0.6) * -100000), 100) * 1%));
+    --th-text-on-#{$colorName}-dark: hsl(var(--th-base-text-color),
+      calc(clamp(var(--th-base-text-color-lightness), calc(((var(--th-base-#{$colorName}-color-lightness) - 20) / 100 - 0.6) * -100000), 100) * 1%));
+  }
+
+  --th-border-radius: #{$border-radius};
+  --th-font-family: #{$font-family};
+  --th-font-size: #{$font-size};
+}
+
+
+[v-cloak] {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  font-family: var(--th-font-family, "Arial");
+  font-size: var(--th-font-size, 16px);
+  color: var(--th-text-color, #3d3d3d);
+}
+
+.text-white {
+  color: white;
+}
+
+.text-color {
+  color: $text-color;
+}
+
+@each $colorName, $color in $colors {
+  .bg-#{$colorName} {
+    background-color: var(--th-#{$colorName}-color, $color);
+  }
+
+  .bg-#{$colorName}-light {
+    background-color: var(--th-#{$colorName}-color-light, lighten($color, 15%));
+  }
+
+  .bg-#{$colorName}-dark {
+    background-color: var(--th-#{$colorName}-color-dark, darken($color, 15%));
+  }
+
+  .text-#{$colorName} {
+    color: var(--th-#{$colorName}-color, $color);
+  }
+
+  .text-#{$colorName}-light {
+    color: var(--th-#{$colorName}-color-light, lighten($color, 15%));
+  }
+
+  .text-#{$colorName}-dark {
+    color: var(--th-#{$colorName}-color-dark, darken($color, 15%));
+  }
+
+  .text-on-#{$colorName} {
+    color: var(--th-text-on-#{$colorName}, $text-color);
+  }
+
+  .text-on-#{$colorName}-light {
+    color: var(--th-text-on-#{$colorName}-light, $text-color);
+  }
+
+  .text-on-#{$colorName}-dark {
+    color: var(--th-text-on-#{$colorName}-dark, $text-color);
+  }
+}

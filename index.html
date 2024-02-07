@@ -6,35 +6,87 @@
   <title>Document</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      padding: 20px;
+      border: 2px solid var(--th-primary-color, green);
+      margin: 10px;
+    }
+  </style>
 </head>
 
 <body>
   <!-- my app -->
   <div id="app" v-cloak>
-    <Navbar></Navbar>
+    
+    <div class="sample-grid">
+      <div>
+        <h1>Inputs</h1>
+        <form action="">
+          <div><input type="text" value="asdasd"></div>
+          <div><input type="email" value="asdasd@asd.com"></div>
+          <div><input type="password" value="asdasd"></div>
+          <div><textarea name="" id="" cols="30" rows="10" value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet iure, voluptate soluta natus hic repellat libero possimus debitis aperiam. Corrupti quia explicabo aliquid error, laborum hic adipisci asperiores eveniet consectetur?"></textarea></div>
+          
+        </form>
+      </div>
+
+      <div>
+        <h1></h1>
+        <form action="">
+          <div>
+            <input type="checkbox" name="checkbox">
+            <input type="checkbox" checked name="checkbox">
+          </div>
+
+          <div>
+            <input type="radio" name="radio">
+            <input type="radio" checked  name="radio">
+          </div>
+
+          <div>
+            <select name="" id="">
+              <option value="asd">asd</option>
+              <option value="asd">asd</option>
+              <option value="asd">asd</option>
+              <option value="asd">asd</option>
+              <option value="asd">asd</option>
+            </select>
+            <input type="radio" checked  name="radio">
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="content-grid">
-      <my-test-component class="full-width bg-main-light text-on-main-light"></my-test-component>
-      <my-test-component class="bg-main text-on-main"></my-test-component>
-      <my-test-component class="bg-main-dark text-on-main-dark"></my-test-component>
-      <my-test-component class="breakout bg-secondary-light text-on-secondary-light"></my-test-component>
-      <my-test-component class="bg-secondary text-on-secondary"></my-test-component>
-      <my-test-component class="bg-secondary-dark text-on-secondary-dark"></my-test-component>
-      <my-test-component class="bg-highlight-light text-on-highlight-light"></my-test-component>
-      <my-test-component class="bg-highlight text-on-highlight"></my-test-component>
-      <my-test-component class="bg-highlight-dark text-on-highlight-dark"></my-test-component>
+      <template v-for="color in colors" :key="color">
+        <my-test-component
+          :class="`bg-${color}-light text-on-${color}-light`"
+          :color="color + '-light'"
+        ></my-test-component>
+        <my-test-component
+          :class="`bg-${color} text-on-${color}`"
+          :color="color"
+        ></my-test-component>
+        <my-test-component
+          :class="`bg-${color}-dark text-on-${color}-dark`"
+          :color="color + '-dark'"
+        ></my-test-component>
+      </template>
     </div>
   </div>
 
   <!-- My test component -->
   <template id="my-test-component">
     <div>
-      <div style="padding: 20px;">
-        <h1>My test component</h1>
+      <div style="padding: 20px">
+        <h1>{{ color }}</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt ab
-          corrupti maiores, maxime quam aperiam. Veniam deleniti deserunt, beatae
-          quidem error mollitia fuga distinctio necessitatibus ea cum. Doloremque,
-          nesciunt vitae.
+          corrupti maiores, maxime quam aperiam. Veniam deleniti deserunt,
+          beatae quidem error mollitia fuga distinctio necessitatibus ea cum.
+          Doloremque, nesciunt vitae.
         </p>
       </div>
     </div>
@@ -47,8 +99,17 @@
       <a href="#" class="navbar-logo">
         <img src="./images/main_logo.png" alt="Logo" />
       </a>
-      <input type="checkbox" id="menu-toggle" name="menu-toggle" v-model="checked" />
-      <label for="mobile-menu-toggle" class="hamburger" @click="checked = !checked">
+      <input
+        type="checkbox"
+        id="menu-toggle"
+        name="menu-toggle"
+        v-model="checked"
+      />
+      <label
+        for="mobile-menu-toggle"
+        class="hamburger"
+        @click="checked = !checked"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -69,6 +130,15 @@
       data() {
         return {
           count: 0,
+          colors: [
+            "primary",
+            "secondary",
+            "highlight",
+            "success",
+            "info",
+            "danger",
+            "warning",
+          ],
         };
       },
       methods: {
@@ -80,6 +150,11 @@
 
     app.component("my-test-component", {
       template: "#my-test-component",
+      props: {
+        color: {
+          type: String,
+        },
+      },
     });
 
     app.component("Navbar", {
@@ -87,7 +162,7 @@
       data() {
         return {
           checked: false,
-        }
+        };
       },
     });
 
